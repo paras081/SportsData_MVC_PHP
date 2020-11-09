@@ -17,17 +17,57 @@
 		}
 
 		public function close_db(){
-			
-			
+			$this->condb->close();
 		}
 
 		public function selectRecord(){
 
+			$this->open_db();
 			$query = $this->condb->prepare("SELECT * FROM sports");
 			$query->execute();
 			$result = $query->get_result();
-
+			$this->close_db();
 			return $result;
+		}
+
+		public function insertRecord($obj){
+
+			$this->open_db();
+			
+			$query = $this->condb->prepare("INSERT INTO sports (category, name) VALUES (?,?)");
+
+			$query->bind_param("ss", $obj->category, $obj->name);
+
+			$query->execute();
+			
+			$result = $query->get_result();
+
+			$last_id =  $this->condb->insert_id;
+			
+			$this->close_db();
+			
+			return $last_id;
+		}
+
+		public function updateRecord($obj){
+				$this->open_db();
+			
+			$query = $this->condb->prepare("INSERT INTO sports (category, name) VALUES (?,?)");
+
+			$query->bind_param("ss", $obj->category, $obj->name);
+
+			$query->execute();
+			
+			$result = $query->get_result();
+
+			$last_id =  $this->condb->insert_id;
+			
+			$this->close_db();
+			
+		}
+
+		public function deleteRecord(){
+			
 		}
 
 

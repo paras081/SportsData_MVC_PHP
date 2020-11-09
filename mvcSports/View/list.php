@@ -1,26 +1,21 @@
-<?php
-
-	
-
-
-?>
 
 <html>
 
 	<head>
 		<title>Dashboard</title>
-	</head>
+		<link type="text/css" rel="stylesheet" href="~/../libs/cssSports.css">
+ 	</head>
 	<body>
 		<div>
 			<h2>Sports Details</h2>
 			<a href="/mvcSports/index.php">Home</a><br>
-			<a href="/View/insert.php">Add New Sports</a><br>
+			<a href="View/insert.php">Add New Sports</a><br>
 		</div>
 		<div>
 			<?php
 			if($result->num_rows > 0){
 			?>
-			<table>
+			<table id="customers">
 				<thead>
 					<th>No.</th>
 					<th>Sports Category</th>
@@ -34,11 +29,15 @@
 					?>
 					<tr>
 						<td><?php  echo $row['id']; ?></td>
-						<td><?php  echo $row['Category']; ?></td>
+						<td><?php  echo $row['category']; ?></td>
 						<td><?php  echo $row['name']; ?></td>
 						<td>
-							<a href="index.php?act=update">update</a>
-							<a href="index.php?act=delete">delete</a>
+							<a href="index.php?act=update&id=
+							<?php  echo $row['id']; ?>
+							">update</a>
+							<a href="index.php?act=delete&id=
+							<?php  echo $row['id']; ?>
+							">delete</a>
 						</td>
 					</tr>
 					<?php
@@ -50,7 +49,7 @@
 			</table>
 			<?php
 				}else{
-					echo "No record found";
+					echo "<h2>No record found</h2>";
 				}
 			?>
 		</div>
